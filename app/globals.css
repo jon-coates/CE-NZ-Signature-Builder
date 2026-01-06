@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Signature Preview Styling */
+.signature-preview {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.signature-preview table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.signature-preview img {
+  max-width: 100%;
+  height: auto;
+}
+
+.signature-preview a {
+  text-decoration: none;
+}
+
