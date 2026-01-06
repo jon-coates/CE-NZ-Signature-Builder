@@ -10,7 +10,7 @@ const initialData: SignatureData = {
   jobTitle: '',
   email: '',
   phone: '',
-  address: '',
+  address: 'Brisbane | Sydney | Melbourne',
 };
 
 export default function Home() {

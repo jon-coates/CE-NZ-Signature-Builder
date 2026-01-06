@@ -30,10 +30,17 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
 
     const fullName = escapeHtml(data.fullName || 'Your Name');
     const jobTitle = escapeHtml(data.jobTitle || 'Job Title');
-    const email = escapeHtml(data.email || 'email@carexpert.com.au');
-    const phone = escapeHtml(data.phone || 'Contact Phone Number');
-    const address = escapeHtml(data.address || 'Address');
-    const emailUrl = escapeUrl(`mailto:${data.email || 'email@carexpert.com.au'}`);
+    
+    // Check if all contact fields are provided
+    const hasEmail = data.email && data.email.trim() !== '';
+    const hasPhone = data.phone && data.phone.trim() !== '';
+    const hasAddress = data.address && data.address.trim() !== '';
+    const showContactInfo = hasEmail && hasPhone && hasAddress;
+    
+    const email = escapeHtml(data.email || '');
+    const phone = escapeHtml(data.phone || '');
+    const address = escapeHtml(data.address || '');
+    const emailUrl = escapeUrl(`mailto:${data.email || ''}`);
     const phoneUrl = escapeUrl(`tel:${data.phone || ''}`);
 
     // Determine website URL based on country
@@ -84,6 +91,7 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                           <span>${jobTitle}</span>
                         </p>
 
+                        ${showContactInfo ? `
                         <p color="#000000" font-size="small" style="margin: 0px; font-weight: 500; color: rgb(0, 0, 0); font-size: 12px; line-height: 20px;">
                           <a href="${emailUrl}" color="#000000" style="text-decoration: none; color: rgb(0, 0, 0); font-size: 12px;"><span>${email}</span></a><br>
                           <a href="${phoneUrl}" color="#000000" style="text-decoration: none; color: rgb(0, 0, 0); font-size: 12px;"><span>${phone}</span></a>
@@ -92,6 +100,7 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                         <p color="#000000" font-size="small" style="margin: 0px; color: rgb(0, 0, 0); font-size: 12px; text-align: left; line-height: 15px; margin-top: 10px; margin-bottom: 10px;">
                           <span>${address}</span>
                         </p>
+                        ` : ''}
                       </td>
                       <td width="15"><div></div></td>
                     </tr>
@@ -110,11 +119,45 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
   const handleCopy = async () => {
     try {
       const html = generateSignatureHTML();
-      await navigator.clipboard.writeText(html);
+      
+      // Create a temporary container with the HTML content
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = html;
+      tempDiv.style.position = 'fixed';
+      tempDiv.style.left = '-9999px';
+      tempDiv.style.top = '-9999px';
+      document.body.appendChild(tempDiv);
+      
+      // Select the content
+      const range = document.createRange();
+      range.selectNodeContents(tempDiv);
+      const selection = window.getSelection();
+      selection?.removeAllRanges();
+      selection?.addRange(range);
+      
+      // Copy using execCommand which preserves HTML formatting for email clients
+      document.execCommand('copy');
+      
+      // Clean up
+      selection?.removeAllRanges();
+      document.body.removeChild(tempDiv);
+      
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy:', err);
+      // Fallback: try modern Clipboard API
+      try {
+        const html = generateSignatureHTML();
+        const clipboardItem = new ClipboardItem({
+          'text/html': new Blob([html], { type: 'text/html' }),
+        });
+        await navigator.clipboard.write([clipboardItem]);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch (fallbackErr) {
+        console.error('Fallback copy also failed:', fallbackErr);
+      }
     }
   };
 

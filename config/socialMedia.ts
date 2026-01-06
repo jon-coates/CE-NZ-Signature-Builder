@@ -53,27 +53,27 @@ export const socialMediaConfig: Record<Country, CountryConfig> = {
       {
         name: 'YouTube',
         url: 'https://www.youtube.com/CarExpertNZ', // Placeholder - update with actual URL
-        icon: '/assets/icons/youtube.svg',
+        icon: '/assets/icons/youtube.png',
       },
       {
         name: 'Facebook',
         url: 'https://facebook.com/CarExpertNZ', // Placeholder - update with actual URL
-        icon: '/assets/icons/facebook.svg',
+        icon: '/assets/icons/facebook.png',
       },
       {
         name: 'Instagram',
         url: 'https://instagram.com/carexpert.co.nz', // Placeholder - update with actual URL
-        icon: '/assets/icons/instagram.svg',
+        icon: '/assets/icons/instagram.png',
       },
       {
         name: 'Twitter',
         url: 'https://twitter.com/CarExpertNZ', // Placeholder - update with actual URL
-        icon: '/assets/icons/twitter.svg',
+        icon: '/assets/icons/twitter.png',
       },
       {
         name: 'LinkedIn',
         url: 'https://www.linkedin.com/company/carexpertnz/', // Placeholder - update with actual URL
-        icon: '/assets/icons/linkedin.svg',
+        icon: '/assets/icons/linkedin.png',
       },
     ],
   },

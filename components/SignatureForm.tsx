@@ -18,10 +18,19 @@ interface SignatureFormProps {
 
 export default function SignatureForm({ data, onChange }: SignatureFormProps) {
   const handleChange = (field: keyof SignatureData, value: string | Country) => {
-    onChange({
+    const updatedData = {
       ...data,
       [field]: value,
-    });
+    };
+    
+    // Update address default when country changes
+    if (field === 'country') {
+      updatedData.address = value === 'au' 
+        ? 'Brisbane | Sydney | Melbourne' 
+        : 'Auckland';
+    }
+    
+    onChange(updatedData);
   };
 
   return (
