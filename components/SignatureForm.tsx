@@ -22,14 +22,14 @@ export default function SignatureForm({ data, onChange }: SignatureFormProps) {
       ...data,
       [field]: value,
     };
-    
+
     // Update address default when country changes
     if (field === 'country') {
-      updatedData.address = value === 'au' 
-        ? 'Brisbane | Sydney | Melbourne' 
+      updatedData.address = value === 'au'
+        ? 'Brisbane | Sydney | Melbourne'
         : 'Auckland';
     }
-    
+
     onChange(updatedData);
   };
 

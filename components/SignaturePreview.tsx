@@ -31,11 +31,10 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
     const fullName = escapeHtml(data.fullName || 'Your Name');
     const jobTitle = escapeHtml(data.jobTitle || 'Job Title');
     
-    // Check if all contact fields are provided
+    // Check which contact fields are provided
     const hasEmail = data.email && data.email.trim() !== '';
     const hasPhone = data.phone && data.phone.trim() !== '';
     const hasAddress = data.address && data.address.trim() !== '';
-    const showContactInfo = hasEmail && hasPhone && hasAddress;
     
     const email = escapeHtml(data.email || '');
     const phone = escapeHtml(data.phone || '');
@@ -44,8 +43,8 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
     const phoneUrl = escapeUrl(`tel:${data.phone || ''}`);
 
     // Determine website URL based on country
-    const websiteUrl = data.country === 'nz' 
-      ? 'https://www.carexpert.co.nz/' 
+    const websiteUrl = data.country === 'nz'
+      ? 'https://www.carexpert.co.nz/'
       : 'https://www.carexpert.com.au/';
 
     // Build social links as table cells
@@ -91,12 +90,13 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                           <span>${jobTitle}</span>
                         </p>
 
-                        ${showContactInfo ? `
+                        ${hasEmail || hasPhone ? `
                         <p color="#000000" font-size="small" style="margin: 0px; font-weight: 500; color: rgb(0, 0, 0); font-size: 12px; line-height: 20px;">
-                          <a href="${emailUrl}" color="#000000" style="text-decoration: none; color: rgb(0, 0, 0); font-size: 12px;"><span>${email}</span></a><br>
-                          <a href="${phoneUrl}" color="#000000" style="text-decoration: none; color: rgb(0, 0, 0); font-size: 12px;"><span>${phone}</span></a>
+                          ${hasEmail ? `<a href="${emailUrl}" color="#000000" style="text-decoration: none; color: rgb(0, 0, 0); font-size: 12px;"><span>${email}</span></a>` : ''}${hasEmail && hasPhone ? '<br>' : ''}${hasPhone ? `<a href="${phoneUrl}" color="#000000" style="text-decoration: none; color: rgb(0, 0, 0); font-size: 12px;"><span>${phone}</span></a>` : ''}
                         </p>
+                        ` : ''}
 
+                        ${hasAddress ? `
                         <p color="#000000" font-size="small" style="margin: 0px; color: rgb(0, 0, 0); font-size: 12px; text-align: left; line-height: 15px; margin-top: 10px; margin-bottom: 10px;">
                           <span>${address}</span>
                         </p>
