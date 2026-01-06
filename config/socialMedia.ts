@@ -42,7 +42,7 @@ export const socialMediaConfig: Record<Country, CountryConfig> = {
       },
       {
         name: 'TikTok',
-        url: 'https://www.linkedin.com/company/carexpertaus/',
+        url: 'https://www.tiktok.com/@carexpertau',
         icon: '/assets/icons/tiktok.png',
       },
     ],
