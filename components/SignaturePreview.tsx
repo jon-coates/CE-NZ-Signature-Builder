@@ -191,7 +191,7 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
           <strong>How to use:</strong>
         </p>
         <ol className="list-decimal list-inside space-y-1">
-          <li>Click the "Copy Signature" button above</li>
+          <li>Click the &quot;Copy Signature&quot; button above</li>
           <li>Go to your Gmail settings → Signature</li>
           <li>Paste the copied HTML into your signature editor</li>
         </ol>
