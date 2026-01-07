@@ -18,33 +18,33 @@ export const socialMediaConfig: Record<Country, CountryConfig> = {
       {
         name: 'YouTube',
         url: 'https://www.youtube.com/CarExpertAus',
-        icon: '/assets/icons/youtube.png',
+        icon: 'https://assets.carexpert.com.au/email/images/icon-youtube-big.png',
       },
       {
         name: 'Facebook',
         url: 'https://facebook.com/CarExpertAus',
-        icon: '/assets/icons/facebook.png',
+        icon: 'https://assets.carexpert.com.au/email/images/icon-facebook-big.png',
       },
       {
         name: 'Instagram',
         url: 'https://instagram.com/carexpert.com.au',
-        icon: '/assets/icons/instagram.png',
+        icon: 'https://assets.carexpert.com.au/email/images/icon-instagram-big.png',
       },
       {
         name: 'Twitter',
         url: 'https://twitter.com/CarExpertAus',
-        icon: '/assets/icons/twitter.png',
+        icon: 'https://assets.carexpert.com.au/email/images/icon-twitter-big.png',
       },
       {
         name: 'LinkedIn',
         url: 'https://www.linkedin.com/company/carexpertaus/',
-        icon: '/assets/icons/linkedin.png',
+        icon: 'https://c-images.carexpert.com.au/upload/v1680489658/socials/linkedIn_q33xin.jpg',
       },
-      {
-        name: 'TikTok',
-        url: 'https://www.tiktok.com/@carexpertau',
-        icon: '/assets/icons/tiktok.png',
-      },
+    //   {
+    //     name: 'TikTok',
+    //     url: 'https://www.tiktok.com/@carexpertau',
+    //     icon: '/assets/icons/tiktok.png',
+    //   },
     ],
   },
   nz: {

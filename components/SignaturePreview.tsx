@@ -51,8 +51,8 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
     const socialLinksCells = countryConfig.socialLinks
       .map(
         (link) =>
-          `<td style="text-align: center; padding: 0 4px 0 0; width: auto;">
-            <a href="${escapeUrl(link.url)}" target="_blank"><img height="25" src="${escapeUrl(link.icon)}" alt="${escapeHtml(link.name)}" style="border: 0; display: block;" /></a>
+          `<td align="center">
+            <a href="${escapeUrl(link.url)}" target="_blank"><img height="25" width="25" src="${escapeUrl(link.icon)}" border="0" style="max-width: 25px;" /></a>
           </td>`
       )
       .join('');
@@ -60,18 +60,18 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
     return `<table cellpadding="0" cellspacing="0" border="0" style="vertical-align: -webkit-baseline-middle; font-size: small; font-family: sans-serif;">
   <tbody>
     <tr>
-      <td style="vertical-align: middle">
+      <td valign="middle" style="vertical-align: middle">
         <table cellpadding="0" cellspacing="0" border="0" style="vertical-align: -webkit-baseline-middle; font-size: small; font-family: sans-serif;">
           <tbody>
             <tr>
-              <td style="vertical-align: top">
-                <table cellpadding="0" border="0" cellspacing="0" style="vertical-align: -webkit-baseline-middle; font-size: small; font-family: sans-serif;">
+              <td valign="top" style="vertical-align: top">
+                <table cellpadding="0" border="0" cellspacing="0" style="vertical-align: -webkit-baseline-middle; font-size: small; font-family: sans-serif; width: 100%;">
                   <tbody>
                     <tr>
-                      <td width="180" style="vertical-align: top; width: 180px;">
-                        <a href="${escapeUrl(websiteUrl)}" target="_blank"><img src="${escapeUrl(countryConfig.logo)}" role="presentation" width="180" style="max-width: 180px; display: block; border: 0;" alt="CarExpert" /></a>
+                      <td valign="top" style="vertical-align: top;">
+                        <a href="${escapeUrl(websiteUrl)}" target="_blank"><img src="${escapeUrl(countryConfig.logo)}" role="presentation" width="180" border="0" style="max-width: 180px; display: block;" /></a>
 
-                        <table cellpadding="0" cellspacing="0" border="0" style="margin-top: 10px; width: auto;">
+                        <table width="100%" border="0" style="margin-top: 10px;">
                           <tbody>
                             <tr>
                               ${socialLinksCells}
@@ -79,30 +79,46 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                           </tbody>
                         </table>
                       </td>
-                      <td width="15"><div></div></td>
-                      <td color="#ff0000" direction="vertical" width="1" style="width: 1px; border-bottom: none; border-left: 1px solid rgb(255, 0, 0);"></td>
-                      <td width="15"><div></div></td>
-                      <td>
-                        <h3 color="#000000" style="margin: 0px; font-size: 16px; color: rgb(0, 0, 0);">
-                          <span><strong>${fullName}</strong></span>
-                        </h3>
-                        <p color="#000000" font-size="small" style="margin: 0px; color: rgb(0, 0, 0); font-size: 12px; line-height: 20px;">
-                          <span>${jobTitle}</span>
-                        </p>
-
-                        ${hasEmail || hasPhone ? `
-                        <p color="#000000" font-size="small" style="margin: 0px; font-weight: 500; color: rgb(0, 0, 0); font-size: 12px; line-height: 20px;">
-                          ${hasEmail ? `<a href="${emailUrl}" color="#000000" style="text-decoration: none; color: rgb(0, 0, 0); font-size: 12px;"><span>${email}</span></a>` : ''}${hasEmail && hasPhone ? '<br>' : ''}${hasPhone ? `<a href="${phoneUrl}" color="#000000" style="text-decoration: none; color: rgb(0, 0, 0); font-size: 12px;"><span>${phone}</span></a>` : ''}
-                        </p>
-                        ` : ''}
-
-                        ${hasAddress ? `
-                        <p color="#000000" font-size="small" style="margin: 0px; color: rgb(0, 0, 0); font-size: 12px; text-align: left; line-height: 15px; margin-top: 10px; margin-bottom: 10px;">
-                          <span>${address}</span>
-                        </p>
-                        ` : ''}
+                      <td width="15" aria-label="Vertical Spacer"><div style="width: 15px;"></div></td>
+                      <td width="1" aria-label="Divider" style="width: 1px; height: auto; border-bottom: none; border-left: 1px solid rgb(255, 0, 0);"></td>
+                      <td width="15" aria-label="Vertical Spacer"><div style="width: 15px;"></div></td>
+                      <td valign="top">
+                        <table cellpadding="0" cellspacing="0" border="0">
+                          <tbody>
+                            <tr>
+                              <td style="font-family: sans-serif; font-size: 16px; color: #000000; line-height: 20px; padding: 0; margin: 0;">
+                                <b>${fullName}</b>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="font-family: sans-serif; font-size: 12px; color: #000000; line-height: 20px; padding: 0; margin: 0;">
+                                ${jobTitle}
+                              </td>
+                            </tr>
+                            ${hasEmail || hasPhone ? `
+                            <tr>
+                              <td style="font-family: sans-serif; font-size: 12px; font-weight: 500; color: #000000; line-height: 20px; padding: 0; margin: 0;">
+                                ${hasEmail ? `<a href="${emailUrl}" color="#000000" style="text-decoration: none; color: #000000; font-size: 12px;"><span>${email}</span></a>` : ''}${hasEmail && hasPhone ? '<br>' : ''}${hasPhone ? `<a href="${phoneUrl}" color="#000000" style="text-decoration: none; color: #000000; font-size: 12px;"><span>${phone}</span></a>` : ''}
+                              </td>
+                            </tr>
+                            ` : ''}
+                            ${hasAddress ? `
+                            <tr>
+                              <td height="10" aria-label="Horizontal Spacer" style="font-size: 0; line-height: 0;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td style="font-family: sans-serif; font-size: 12px; color: #000000; line-height: 15px; padding: 0; margin: 0;">
+                                ${address}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="10" aria-label="Horizontal Spacer" style="font-size: 0; line-height: 0;">&nbsp;</td>
+                            </tr>
+                            ` : ''}
+                          </tbody>
+                        </table>
                       </td>
-                      <td width="15"><div></div></td>
+                      <td width="15" aria-label="Vertical Spacer"><div style="width: 15px;"></div></td>
                     </tr>
                   </tbody>
                 </table>
