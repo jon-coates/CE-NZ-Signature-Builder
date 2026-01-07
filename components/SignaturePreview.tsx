@@ -51,27 +51,27 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
     const socialLinksCells = countryConfig.socialLinks
       .map(
         (link) =>
-          `<td align="center">
-            <a href="${escapeUrl(link.url)}" target="_blank"><img height="25" width="25" src="${escapeUrl(link.icon)}" border="0" style="max-width: 25px;" /></a>
+          `<td style="text-align:center">
+            <a href="${escapeUrl(link.url)}" target="_blank"><img height="25" width="25" src="${escapeUrl(link.icon)}" style="max-width:25px;max-height:25px" /></a>
           </td>`
       )
       .join('');
 
-    return `<table cellpadding="0" cellspacing="0" border="0" style="vertical-align: -webkit-baseline-middle; font-size: small; font-family: sans-serif;">
+    return `<table cellpadding="0" cellspacing="0" border="0" style="vertical-align:-webkit-baseline-middle;font-size:small;font-family:sans-serif">
   <tbody>
     <tr>
-      <td valign="middle" style="vertical-align: middle">
-        <table cellpadding="0" cellspacing="0" border="0" style="vertical-align: -webkit-baseline-middle; font-size: small; font-family: sans-serif;">
+      <td style="vertical-align:middle">
+        <table cellpadding="0" cellspacing="0" border="0" style="vertical-align:-webkit-baseline-middle;font-size:small;font-family:sans-serif">
           <tbody>
             <tr>
-              <td valign="top" style="vertical-align: top">
-                <table cellpadding="0" border="0" cellspacing="0" style="vertical-align: -webkit-baseline-middle; font-size: small; font-family: sans-serif; width: 100%;">
+              <td style="vertical-align:top">
+                <table cellpadding="0" border="0" cellspacing="0" style="vertical-align:-webkit-baseline-middle;font-size:small;font-family:sans-serif">
                   <tbody>
                     <tr>
-                      <td valign="top" style="vertical-align: top;">
-                        <a href="${escapeUrl(websiteUrl)}" target="_blank"><img src="${escapeUrl(countryConfig.logo)}" role="presentation" width="180" border="0" style="max-width: 180px; display: block;" /></a>
+                      <td style="vertical-align:top">
+                        <a href="${escapeUrl(websiteUrl)}" target="_blank"><img src="${escapeUrl(countryConfig.logo)}" width="180" style="max-width:1800px;display:block" /></a>
 
-                        <table width="100%" border="0" style="margin-top: 10px;">
+                        <table width="100%" border="0" style="margin-top:10px">
                           <tbody>
                             <tr>
                               ${socialLinksCells}
@@ -79,50 +79,32 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                           </tbody>
                         </table>
                       </td>
-                      <td width="15" aria-label="Vertical Spacer"><div style="width: 15px;"></div></td>
-                      <td width="1" aria-label="Divider" style="width: 1px; height: auto; border-bottom: none; border-left: 1px solid rgb(255, 0, 0);"></td>
-                      <td width="15" aria-label="Vertical Spacer"><div style="width: 15px;"></div></td>
-                      <td valign="top">
-                        <table cellpadding="0" cellspacing="0" border="0">
-                          <tbody>
-                            <tr>
-                              <td style="font-family: sans-serif; font-size: 16px; color: #000000; line-height: 20px; padding: 0; margin: 0;">
-                                <b>${fullName}</b>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td style="font-family: sans-serif; font-size: 12px; color: #000000; line-height: 20px; padding: 0; margin: 0;">
-                                ${jobTitle}
-                              </td>
-                            </tr>
-                            ${hasEmail || hasPhone ? `
-                            <tr>
-                              <td style="font-family: sans-serif; font-size: 12px; font-weight: 500; color: #000000; line-height: 20px; padding: 0; margin: 0;">
-                                ${hasEmail ? `<a href="${emailUrl}" color="#000000" style="text-decoration: none; color: #000000; font-size: 12px;"><span>${email}</span></a>` : ''}${hasEmail && hasPhone ? '<br>' : ''}${hasPhone ? `<a href="${phoneUrl}" color="#000000" style="text-decoration: none; color: #000000; font-size: 12px;"><span>${phone}</span></a>` : ''}
-                              </td>
-                            </tr>
-                            ` : ''}
-                            ${hasAddress ? `
-                            <tr>
-                              <td height="10" aria-label="Horizontal Spacer" style="font-size: 0; line-height: 0;">&nbsp;</td>
-                            </tr>
-                            <tr>
-                              <td style="font-family: sans-serif; font-size: 12px; color: #000000; line-height: 15px; padding: 0; margin: 0;">
-                                ${address}
-                              </td>
-                            </tr>
-                            <tr>
-                              <td height="10" aria-label="Horizontal Spacer" style="font-size: 0; line-height: 0;">&nbsp;</td>
-                            </tr>
-                            ` : ''}
-                          </tbody>
-                        </table>
-                      </td>
-                      <td width="15" aria-label="Vertical Spacer"><div style="width: 15px;"></div></td>
                     </tr>
                   </tbody>
                 </table>
               </td>
+              <td width="15"><div></div></td>
+              <td color="#ff0000" direction="vertical" width="1" style="width:1px;border-bottom:none;border-left:1px solid rgb(255,0,0)"></td>
+              <td width="15"><div></div></td>
+              <td>
+                <h3 color="#000000" style="margin:0px;font-size:16px;color:rgb(0,0,0)">
+                  <span>${fullName}</span>
+                </h3>
+                <p color="#000000" style="margin:0px;color:rgb(0,0,0);font-size:12px;line-height:20px">
+                  <span>${jobTitle}</span>
+                </p>
+                ${hasEmail || hasPhone ? `
+                <p color="#000000" style="margin:0px;color:rgb(0,0,0);font-size:12px;line-height:20px">
+                  ${hasEmail ? `<a href="${emailUrl}" color="#000000" style="color:rgb(0,0,0)" target="_blank">${email}</a>` : ''}${hasEmail && hasPhone ? '<br>' : ''}${hasPhone ? `<a href="${phoneUrl}" color="#000000" style="color:rgb(0,0,0)" target="_blank">${phone}</a>` : ''}
+                </p>
+                ` : ''}
+                ${hasAddress ? `
+                <p color="#000000" style="margin:10px 0px;color:rgb(0,0,0);font-size:12px;line-height:15px">
+                  <span>${address}</span>
+                </p>
+                ` : ''}
+              </td>
+              <td width="15"><div></div></td>
             </tr>
           </tbody>
         </table>
@@ -135,40 +117,44 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
   const handleCopy = async () => {
     try {
       const html = generateSignatureHTML();
-      
-      // Create a temporary container with the HTML content
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = html;
-      tempDiv.style.position = 'fixed';
-      tempDiv.style.left = '-9999px';
-      tempDiv.style.top = '-9999px';
-      document.body.appendChild(tempDiv);
-      
-      // Select the content
-      const range = document.createRange();
-      range.selectNodeContents(tempDiv);
-      const selection = window.getSelection();
-      selection?.removeAllRanges();
-      selection?.addRange(range);
-      
-      // Copy using execCommand which preserves HTML formatting for email clients
-      document.execCommand('copy');
-      
-      // Clean up
-      selection?.removeAllRanges();
-      document.body.removeChild(tempDiv);
-      
+
+      // Try modern Clipboard API first with both HTML and plain text
+      const clipboardItem = new ClipboardItem({
+        'text/html': new Blob([html], { type: 'text/html' }),
+        'text/plain': new Blob([html], { type: 'text/plain' }),
+      });
+      await navigator.clipboard.write([clipboardItem]);
+
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy:', err);
-      // Fallback: try modern Clipboard API
+      console.error('Failed to copy with Clipboard API:', err);
+      // Fallback: try execCommand
       try {
         const html = generateSignatureHTML();
-        const clipboardItem = new ClipboardItem({
-          'text/html': new Blob([html], { type: 'text/html' }),
-        });
-        await navigator.clipboard.write([clipboardItem]);
+
+        // Create a temporary container with the HTML content
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+        tempDiv.style.position = 'fixed';
+        tempDiv.style.left = '-9999px';
+        tempDiv.style.top = '-9999px';
+        document.body.appendChild(tempDiv);
+
+        // Select the content
+        const range = document.createRange();
+        range.selectNodeContents(tempDiv);
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+
+        // Copy using execCommand
+        document.execCommand('copy');
+
+        // Clean up
+        selection?.removeAllRanges();
+        document.body.removeChild(tempDiv);
+
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
       } catch (fallbackErr) {
