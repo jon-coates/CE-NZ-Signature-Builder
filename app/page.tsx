@@ -1,20 +1,31 @@
 'use client';
 
 import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import SignatureForm, { SignatureData } from '@/components/SignatureForm';
 import SignaturePreview from '@/components/SignaturePreview';
+import { Country } from '@/config/socialMedia';
 
-const initialData: SignatureData = {
-  country: 'au',
+const getInitialData = (country: Country): SignatureData => ({
+  country,
   fullName: '',
   jobTitle: '',
   email: '',
   phone: '',
-  address: 'Brisbane | Sydney | Melbourne',
-};
+  address: country === 'au' ? 'Brisbane | Sydney | Melbourne' : 'Auckland',
+});
 
 export default function Home() {
-  const [signatureData, setSignatureData] = useState<SignatureData>(initialData);
+  const searchParams = useSearchParams();
+  const countryParam = searchParams.get('country');
+
+  // Parse and validate the country parameter
+  const initialCountry: Country =
+    countryParam === 'nz' || countryParam === 'au'
+      ? countryParam
+      : 'au';
+
+  const [signatureData, setSignatureData] = useState<SignatureData>(getInitialData(initialCountry));
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4">
