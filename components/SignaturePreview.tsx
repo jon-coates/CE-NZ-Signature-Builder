@@ -48,6 +48,7 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
       : 'https://www.carexpert.com.au/';
 
     // Build social links as table cells
+    const hasSocialLinks = countryConfig.socialLinks.length > 0;
     const socialLinksCells = countryConfig.socialLinks
       .map(
         (link) =>
@@ -64,13 +65,13 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
         <table cellpadding="0" cellspacing="0" border="0" style="vertical-align:-webkit-baseline-middle;font-size:small;font-family:sans-serif">
           <tbody>
             <tr>
-              <td style="vertical-align:top">
-                <table cellpadding="0" border="0" cellspacing="0" style="vertical-align:-webkit-baseline-middle;font-size:small;font-family:sans-serif">
+              <td width="180" style="vertical-align:top">
+                <table cellpadding="0" border="0" cellspacing="0" style="vertical-align:-webkit-baseline-middle;font-size:small;font-family:sans-serif;width:180px">
                   <tbody>
                     <tr>
                       <td style="vertical-align:top">
                         <a href="${escapeUrl(websiteUrl)}" target="_blank"><img src="${escapeUrl(countryConfig.logo)}" width="180" style="max-width:1800px;display:block" /></a>
-
+                        ${hasSocialLinks ? `
                         <table width="100%" border="0" style="margin-top:10px">
                           <tbody>
                             <tr>
@@ -78,6 +79,7 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                             </tr>
                           </tbody>
                         </table>
+                        ` : ''}
                       </td>
                     </tr>
                   </tbody>
