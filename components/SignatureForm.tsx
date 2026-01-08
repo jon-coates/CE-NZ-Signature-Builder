@@ -128,21 +128,6 @@ export default function SignatureForm({ data, onChange }: SignatureFormProps) {
             placeholder="+61 2 1234 5678"
           />
         </div>
-
-        {/* Address */}
-        <div>
-          <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-2">
-            Address
-          </label>
-          <textarea
-            id="address"
-            value={data.address}
-            onChange={(e) => handleChange('address', e.target.value)}
-            rows={3}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            placeholder="123 Main Street, Sydney NSW 2000"
-          />
-        </div>
       </div>
     </div>
   );
