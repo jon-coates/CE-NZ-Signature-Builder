@@ -13,7 +13,7 @@ export interface CountryConfig {
 
 export const socialMediaConfig: Record<Country, CountryConfig> = {
   au: {
-    logo: '/assets/logos/signature_logo_aus.png',
+    logo: 'https://images.carexpert.com.au/resize/400/-/cms/v1/media/signature-logo-aus-v26-1.png',
     socialLinks: [
       {
         name: 'YouTube',
@@ -40,15 +40,15 @@ export const socialMediaConfig: Record<Country, CountryConfig> = {
         url: 'https://www.linkedin.com/company/carexpertaus/',
         icon: 'https://c-images.carexpert.com.au/upload/v1680489658/socials/linkedIn_q33xin.jpg',
       },
-    //   {
-    //     name: 'TikTok',
-    //     url: 'https://www.tiktok.com/@carexpertau',
-    //     icon: '/assets/icons/tiktok.png',
-    //   },
+      {
+        name: 'TikTok',
+        url: 'https://www.tiktok.com/@carexpertau',
+        icon: 'https://images.carexpert.com.au/resize/400/-/cms/v1/media/tiktok.png',
+      },
     ],
   },
   nz: {
-    logo: '/assets/logos/signature_logo_nz.png',
+    logo: 'https://images.carexpert.com.au/resize/400/-/cms/v1/media/signature-logo-nz-v26-1.png',
     socialLinks: [
       // {
       //   name: 'YouTube',
