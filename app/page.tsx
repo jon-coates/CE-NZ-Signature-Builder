@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import SignatureForm, { SignatureData } from '@/components/SignatureForm';
 import SignaturePreview from '@/components/SignaturePreview';
@@ -15,7 +15,7 @@ const getInitialData = (country: Country): SignatureData => ({
   address: country === 'au' ? 'Brisbane | Sydney | Melbourne' : 'Auckland',
 });
 
-export default function Home() {
+function SignatureBuilder() {
   const searchParams = useSearchParams();
   const countryParam = searchParams.get('country');
 
@@ -28,6 +28,19 @@ export default function Home() {
   const [signatureData, setSignatureData] = useState<SignatureData>(getInitialData(initialCountry));
 
   return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div>
+        <SignatureForm data={signatureData} onChange={setSignatureData} />
+      </div>
+      <div>
+        <SignaturePreview data={signatureData} />
+      </div>
+    </div>
+  );
+}
+
+export default function Home() {
+  return (
     <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
@@ -36,14 +49,9 @@ export default function Home() {
           </h1>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div>
-            <SignatureForm data={signatureData} onChange={setSignatureData} />
-          </div>
-          <div>
-            <SignaturePreview data={signatureData} />
-          </div>
-        </div>
+        <Suspense fallback={<div className="text-center">Loading...</div>}>
+          <SignatureBuilder />
+        </Suspense>
       </div>
     </main>
   );
